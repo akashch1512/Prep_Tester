@@ -1,4 +1,3 @@
-```markdown
 # 🧠 MCQ Test App – Django Based Quiz System
 
 A clean and functional **multiple-choice question (MCQ) test interface** built using Django, developed as part of my portfolio for college and placement preparation.
@@ -25,7 +24,7 @@ A clean and functional **multiple-choice question (MCQ) test interface** built u
    ```bash
    git clone https://github.com/akashch1512/Prep_Tester.git
    cd mcq-test-app
-````
+
 
 2. **Create virtual environment (optional but recommended)**
 
@@ -65,6 +64,19 @@ A clean and functional **multiple-choice question (MCQ) test interface** built u
 
 ---
 
+```markdown
+Prep_Tester/
+├── mcq/ # Django app (questions, views, models)
+├── templates/
+│ ├── base.html # Master layout
+│ ├── header.html # Top navbar
+│ ├── sidebar_left.html
+│ ├── sidebar_right.html
+│ └── question.html # Test interface
+├── static/ # (Optional) CSS / JS / assets
+├── db.sqlite3 # Default database
+└── manage.py
+````
 ## 🧩 Model Overview
 
 ```python
@@ -89,22 +101,3 @@ class Question(models.Model):
   * Question bank upload via CSV
   * Timed tests
   * Scoring system and analytics
-
----
-
-## 📜 License
-
-MIT License – free to use, modify, and learn from.
-
-```
-
----
-
-### 🔧 What to Customize
-
-- Replace `"https://github.com/yourusername/mcq-test-app.git"` with your GitHub repo.
-- Update your **LinkedIn** and **GitHub** links.
-- Add any **screenshots** to visually boost the repo.
-
-When you're done, push the project to GitHub and I’ll help you write the repo description and tags to attract recruiters. Let’s make this placement-ready.
-```
