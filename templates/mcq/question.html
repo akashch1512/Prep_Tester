@@ -1,0 +1,83 @@
+{% extends 'mcq/base.html' %}
+
+{% block content %}
+
+<style>
+    .question {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .options label {
+        display: block;
+        margin: 12px 0;
+    }
+
+    .submit-btn {
+        background: #2c3e50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 15px;
+        cursor: pointer;
+    }
+
+    .result-box {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 4px;
+    }
+
+    .correct {
+        background: #e6f7ee;
+        border-left: 4px solid #28a745;
+        color: #28a745;
+    }
+
+    .wrong {
+        background: #fce8e8;
+        border-left: 4px solid #dc3545;
+        color: #dc3545;
+    }
+
+    .solution {
+        margin-top: 10px;
+        color: #495057;
+    }
+</style>
+
+<div class="question">{{ question.question_text }}</div>
+
+<form method="post" class="options">
+    {% csrf_token %}
+    <label>
+        <input type="radio" name="option" value="1" required> {{ question.option1 }}
+    </label>
+    <label>
+        <input type="radio" name="option" value="2"> {{ question.option2 }}
+    </label>
+    <label>
+        <input type="radio" name="option" value="3"> {{ question.option3 }}
+    </label>
+    <label>
+        <input type="radio" name="option" value="4"> {{ question.option4 }}
+    </label>
+
+    <button type="submit" class="submit-btn">Submit Answer</button>
+</form>
+
+{% if submitted %}
+    <div class="result-box {% if is_correct %}correct{% else %}wrong{% endif %}">
+        {% if is_correct %}
+            ✅ <strong>Correct Answer</strong>
+        {% else %}
+            ❌ <strong>Incorrect</strong> (Correct: Option {{ question.correct_option }})
+        {% endif %}
+        <div class="solution">
+            {{ question.solution }}
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}

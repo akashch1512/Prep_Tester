@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MGM JNEC Test Portal{% endblock %}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            grid-template-rows: auto 1fr;
+            min-height: 100vh;
+        }
+        main {
+            padding: 0;
+            background: #f8f9fa;
+        }
+        .question-interface {
+            background: white;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'mcq/header.html' %}
+    {% include 'mcq/sidebar_left.html' %}
+    
+    <main>
+        <div class="question-interface">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+    
+    {% include 'mcq/sidebar_right.html' %}
+</body>
+</html>
