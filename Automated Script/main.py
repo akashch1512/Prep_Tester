@@ -1,7 +1,7 @@
 import json
 import requests
 
-GEMINI_API_KEY = "AIzaSyDVW4vPFJ7frbYhklDgKoaE9-3CEka5Hpg"
+GEMINI_API_KEY = "Key"
 GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={GEMINI_API_KEY}"
 
 def gemini_generate(prompt):
