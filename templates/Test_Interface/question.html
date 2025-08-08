@@ -1,0 +1,154 @@
+{% extends 'Test_Interface/base.html' %}
+
+{% block title %}{{ test.name }} - Question {{ q_index|add:1 }} | MGM JNEC PYQ Portal{% endblock %}
+
+{% block content %}
+<style>
+    .question-card {
+        background-color: var(--bg-card);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        margin-bottom: 30px;
+    }
+    .question-card .question-text {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: var(--text-primary);
+        margin-bottom: 25px;
+        line-height: 1.5;
+    }
+    .options-list label {
+        display: block;
+        background-color: var(--bg-input);
+        border: 1px solid var(--border-color);
+        padding: 15px 20px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        color: var(--text-primary);
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+    }
+    .options-list label:hover {
+        background-color: rgba(255,255,255,0.08);
+        border-color: var(--accent-primary);
+    }
+    .options-list input[type="radio"] {
+        margin-right: 15px;
+        transform: scale(1.3);
+        accent-color: var(--accent-primary);
+    }
+
+    /* Styles for selected/correct/incorrect options after submission */
+    .options-list label.selected-correct {
+        background-color: rgba(var(--success-color-rgb), 0.2);
+        border-color: var(--success-color);
+        color: var(--success-color);
+    }
+    .options-list label.selected-wrong {
+        background-color: rgba(var(--error-color-rgb), 0.2);
+        border-color: var(--error-color);
+        color: var(--error-color);
+    }
+    .options-list label.correct-answer {
+        background-color: rgba(var(--success-color-rgb), 0.2);
+        border-color: var(--success-color);
+        color: var(--success-color);
+        font-weight: bold;
+    }
+    .options-list label.disabled {
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+
+    .feedback-box {
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .feedback-box.correct {
+        background-color: rgba(var(--success-color-rgb), 0.25);
+        border: 1px solid var(--success-color);
+        color: var(--success-color);
+    }
+    .feedback-box.wrong {
+        background-color: rgba(var(--error-color-rgb), 0.25);
+        border: 1px solid var(--error-color);
+        color: var(--error-color);
+    }
+    .solution-box {
+        margin-top: 15px;
+        padding: 15px;
+        background-color: var(--bg-input);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+    }
+    .solution-box strong {
+        color: var(--text-primary);
+    }
+    .navigation-buttons {
+    margin-top: 25px;
+    display: flex;
+    justify-content: flex-end; /* Push buttons to the right */
+    gap: 10px;
+    padding-right: 10px; /* 10px space from right edge */
+}
+}
+
+.navigation-buttons a.btn-custom-outline,
+.navigation-buttons a.btn-custom-primary {
+    flex: 0 0 120px; /* Fixed width of 120px for both buttons */
+    text-align: center;
+    padding: 8px 10px;
+    font-size: 0.95rem;
+    padding-right: 10px; /* 10px space from right edge */
+
+}
+
+</style>
+
+{% load custom_filters %}
+
+    
+
+    <div id="question-card-container"
+     hx-get="{% url 'question_partial' test.id q_index %}"
+     hx-trigger="load"
+     hx-target="#question-card-container"
+     hx-swap="innerHTML">
+</div>
+</div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('questionForm');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        if (submitBtn) {
+            submitBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const selected = document.querySelector('input[name="option"]:checked');
+                if (!selected) {
+                    alert('Please select an option!');
+                    return;
+                }
+                form.submit();
+            });
+        }
+    });
+</script>
+{% endblock %}
